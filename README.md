@@ -9,7 +9,7 @@ AI 안경(~1fps) 관측 스트림으로 4D scene graph 를 유지하며, **지�
   [P1](docs/RESULTS_P1_20260807.md) → [AUDIT](docs/AUDIT_20260808.md) → [P2](docs/RESULTS_P2_20260808.md) →
   [P3](docs/RESULTS_P3_20260808.md) → [P4](docs/RESULTS_P4_20260809.md) → [P5+P6](docs/RESULTS_P5_20260809.md) →
   [P7](docs/RESULTS_P7_20260809.md) → [P8](docs/RESULTS_P8_20260810.md) → [P9](docs/RESULTS_P9_20260810.md) →
-  [P10](docs/RESULTS_P10_20260811.md) · 능력 요약 [CAPABILITY](docs/CAPABILITY_20260810.md)
+  [P10](docs/RESULTS_P10_20260811.md) → [P12](docs/RESULTS_P12_20260812.md) · 능력 요약 [CAPABILITY](docs/CAPABILITY_20260810.md)
 - 데이터 준비: **[DATA_SETUP](docs/DATA_SETUP.md)** · [ADT 셋업](docs/ADT_SETUP.md)
 
 ## 확립된 레시피 (2026-08-11 기준)
@@ -71,10 +71,10 @@ snapshots/   pre_receptacle_20260809 (v0 코드 보존)
 
 ## 진행 중 / 다음
 
-- **P12(진행 중)**: 위치별 조합 어트리뷰트를 켠 3자 비교. 1차 관찰 — 어트리뷰트가 방내 이동·자가이동은
-  올리지만 stayed 를 깎아 전체는 손해 → 게이트에서 차단하고 목적지 경로에만 연결하는 판이 다음 수
-- **JEPA 트랙 재검증 중**: 조건을 맞추자(보조신호 동일) 사전학습이 랜덤초기화보다 나빴다. 조합
-  어트리뷰트를 켠 상태에서 재판정 후 트랙 존폐 결정
+- **P12 완료**: ① 조합 어트리뷰트는 이동(방내 +14%, 자가이동 +8%)엔 도움이나 stayed 를 깎아
+  전체는 손해 → **목적지 경로 전용 연결**이 다음 수 ② **JEPA 사전학습은 값을 하지 않음(확정)** —
+  조건을 맞춘 3자 비교에서 랜덤초기화가 두 설정 모두에서 우세. Track J 는 주력에서 제외
+- 최고 구성: `two_head_v5`(어트리뷰트 OFF·게이트감독·noid·L1사람) + 방-이동 한정 유사라벨 적응
 - 미실험: nmove 비선형 헤드, 로컬 Qwen 팩 대량화, ADT 1인 시퀀스 확충, 주~월 단위 실로그 확보
 
 ## 재현
