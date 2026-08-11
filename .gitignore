@@ -1,0 +1,8 @@
+# 데이터셋 (24GB) — 전부 생성물이거나 외부 라이선스 자산
+data/
+# 학습 산출물 (218MB): 체크포인트·평가 JSON·체인 로그
+results/
+snapshots/
+__pycache__/
+*.pyc
+.DS_Store
