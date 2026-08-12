@@ -78,7 +78,8 @@ def main():
     ap.add_argument("--data", default=os.path.join(os.path.dirname(__file__), "..", "data", "v5", "test"))
     ap.add_argument("--ckpts", default="supervised_two_head_v5,jepa_jepa_v5_ft_fair_probe,jepa_jepa_v5_scr_fair_probe")
     ap.add_argument("--tag", default=None)
-    ap.add_argument("--device", default="mps" if torch.backends.mps.is_available() else "cpu")
+    ap.add_argument("--device", default="cuda" if torch.cuda.is_available() else
+                    ("mps" if torch.backends.mps.is_available() else "cpu"))
     args = ap.parse_args()
     dev = torch.device(args.device)
     rng = random.Random(0)

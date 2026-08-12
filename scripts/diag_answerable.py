@@ -70,7 +70,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--data", default=os.path.join(os.path.dirname(__file__), "..", "data", "v4", "test"))
     ap.add_argument("--ckpts", default="supervised_two_head_v4no2,jepa_jepa_v4no2_ft_probe,supervised_two_head_v4id2")
-    ap.add_argument("--device", default="mps" if torch.backends.mps.is_available() else "cpu")
+    ap.add_argument("--device", default="cuda" if torch.cuda.is_available() else
+                    ("mps" if torch.backends.mps.is_available() else "cpu"))
     args = ap.parse_args()
     dev = torch.device(args.device)
     files = sorted(glob.glob(os.path.join(args.data, "ep_*.json")))

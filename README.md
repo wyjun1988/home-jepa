@@ -10,7 +10,7 @@ AI 안경(~1fps) 관측 스트림으로 4D scene graph 를 유지하며, **지�
   [P3](docs/RESULTS_P3_20260808.md) → [P4](docs/RESULTS_P4_20260809.md) → [P5+P6](docs/RESULTS_P5_20260809.md) →
   [P7](docs/RESULTS_P7_20260809.md) → [P8](docs/RESULTS_P8_20260810.md) → [P9](docs/RESULTS_P9_20260810.md) →
   [P10](docs/RESULTS_P10_20260811.md) → [P12](docs/RESULTS_P12_20260812.md) → [컨셉 검토](docs/CONCEPT_REVIEW_20260812.md) · 능력 요약 [CAPABILITY](docs/CAPABILITY_20260810.md)
-- 데이터 준비: **[DATA_SETUP](docs/DATA_SETUP.md)** · [ADT 셋업](docs/ADT_SETUP.md)
+- 데이터 준비: **[DATA_SETUP](docs/DATA_SETUP.md)** · [ADT 셋업](docs/ADT_SETUP.md) · NVIDIA 학습: [NVIDIA_SETUP](docs/NVIDIA_SETUP.md)
 
 ## 확립된 레시피 (2026-08-11 기준)
 
@@ -89,5 +89,5 @@ snapshots/   pre_receptacle_20260809 (v0 코드 보존)
 ADT 는 본인 라이선스 동의 후 선별 다운로드(3.8GB). `data/` 와 `results/` 는 저장소에 없다.
 
 각 버전 체인 스크립트가 전체 파이프라인(생성→감사 게이트→학습→평가)을 담는다. 예: `bash scripts/v3_chain.sh`.
-환경: `~/work/stock-v2/.venv-mps/bin/python` (py3.9, torch 2.2.2, x86_64; MPS fp32).
+환경: `~/work/stock-v2/.venv-mps/bin/python` (py3.9, torch 2.2.2, x86_64; MPS fp32). NVIDIA/CUDA 는 [NVIDIA_SETUP](docs/NVIDIA_SETUP.md).
 주의: 이 머신 VRAM 8GB — MPS 학습 중 영상 재생 불가. 데이터 재생성 후 `scripts/audit_dataset.py` PASS 필수.

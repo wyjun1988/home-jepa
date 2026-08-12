@@ -38,7 +38,8 @@ def main():
                          "label-free recalibration (which is already calibrated)")
     ap.add_argument("--moved-trust", type=float, default=0.64,
                     help="loss weight for pseudo-moved (= measured agreement)")
-    ap.add_argument("--device", default="mps" if torch.backends.mps.is_available() else "cpu")
+    ap.add_argument("--device", default="cuda" if torch.cuda.is_available() else
+                    ("mps" if torch.backends.mps.is_available() else "cpu"))
     args = ap.parse_args()
     dev = torch.device(args.device)
     rng = random.Random(0)

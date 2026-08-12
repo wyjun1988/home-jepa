@@ -86,7 +86,8 @@ def main():
     ap.add_argument("--tag", default="transfer_homer")
     ap.add_argument("--stats", default="baseline_stats_v1.json")
     ap.add_argument("--noid", action="store_true")
-    ap.add_argument("--device", default="mps" if torch.backends.mps.is_available() else "cpu")
+    ap.add_argument("--device", default="cuda" if torch.cuda.is_available() else
+                    ("mps" if torch.backends.mps.is_available() else "cpu"))
     args = ap.parse_args()
     dev = torch.device(args.device)
     files = sorted(glob.glob(os.path.join(args.data, "ep_*.json")))
