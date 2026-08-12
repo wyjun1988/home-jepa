@@ -102,15 +102,18 @@ def main():
         for g in opt.param_groups:
             g["lr"] = lr_at(step)
         batch = make_batch(tr, rng.sample(pool, args.bs), dev)
-        if args.aux_weight > 0 and hasattr(model, "both"):
+        if args.gate_weight > 0 and hasattr(model, "all_heads"):
+            lp, aux, g_logit = model.all_heads(batch)     # single encoder pass
+            loss = F.nll_loss(lp, batch["gt"])
+            if args.aux_weight > 0:
+                loss = loss + args.aux_weight * F.nll_loss(aux, batch["gt"])
+            y = (batch["gt"] != batch["anchor"]).float()
+            loss = loss + args.gate_weight * F.binary_cross_entropy_with_logits(g_logit, y)
+        elif args.aux_weight > 0 and hasattr(model, "both"):
             lp, aux = model.both(batch)
             loss = F.nll_loss(lp, batch["gt"]) + args.aux_weight * F.nll_loss(aux, batch["gt"])
         else:
             loss = F.nll_loss(model.log_prob(batch), batch["gt"])
-        if args.gate_weight > 0 and hasattr(model, "parts"):
-            g_logit, _ = model.parts(batch)
-            y = (batch["gt"] != batch["anchor"]).float()
-            loss = loss + args.gate_weight * F.binary_cross_entropy_with_logits(g_logit, y)
         opt.zero_grad(set_to_none=True)
         loss.backward()
         torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)

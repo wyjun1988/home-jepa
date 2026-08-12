@@ -44,7 +44,8 @@ python scripts/gen_dataset.py --out data/v5_pretrain --split pretrain --homes 50
 베이스라인 통계 적합:
 ```bash
 python - <<'EOF'
-import glob, json, sys; sys.path.insert(0, ".")
+import glob, json, os, sys; sys.path.insert(0, ".")
+os.makedirs("results", exist_ok=True)
 from homejepa.baselines import fit_stats
 json.dump(fit_stats(sorted(glob.glob("data/v5/train/ep_*.json"))),
           open("results/baseline_stats_v5.json", "w"))

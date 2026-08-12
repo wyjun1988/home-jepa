@@ -138,8 +138,10 @@ class EpTensors:
         n_same = sum(1 for x in obj.values() if x["cls"] == o["cls"])
         idxs = self._window(q["qt"], q["obj"], excl=excl)
         if self.noid:
-            # class-level last evidence: a POS of this class, or a SELF_DROP
-            # (what your own hands placed is identified with certainty).
+            # anchor = the reference track itself, advanced only by later
+            # SELF_DROPs of the same class (your own hands identify what they
+            # placed). Later POS of the class is NOT trusted as the anchor --
+            # it may be a different instance; association is the model's job.
             anchor_rec, anchor_t = q["last_recept"], q["last_t"]
             for j in self.cls_ev.get(CLASS_NAMES.index(obj[q["obj"]]["cls"]), []):
                 if self.t1[j] >= q["qt"] or self.ev_rec[j] < 0:
@@ -555,6 +557,16 @@ class TwoHeadEventTransformer(EventTransformer):
         h = self.encode(b) + self.qdt_proj(b["qdt"])
         re = self.rooms(b)
         return self._main_from(b, h, re), self._aux_from(b, h, re)
+
+    def all_heads(self, b):
+        """(main, aux, gate_logit) from ONE encoder pass — training-loop use.
+        both()+parts() re-encoded and doubled the step cost (P12 검토에서 적발)."""
+        h = self.encode(b) + self.qdt_proj(b["qdt"])
+        re = self.rooms(b)
+        anchor_emb = re.gather(
+            1, b["anchor"].view(-1, 1, 1).expand(-1, 1, re.size(-1))).squeeze(1)
+        gate_logit = self.gate(torch.cat([h, anchor_emb, b["qdt"][:, 2:7]], -1)).squeeze(-1)
+        return self._main_from(b, h, re), self._aux_from(b, h, re), gate_logit
 
     def parts(self, b):
         """(gate_logit, conditional log-softmax over non-anchor slots)."""

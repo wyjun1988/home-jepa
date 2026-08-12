@@ -1,5 +1,9 @@
 # 데이터셋 (24GB) — 전부 생성물이거나 외부 라이선스 자산
 data/
+# 예외: 가구 팩(20KB)은 시뮬 재생성에 필수라 저장소에 포함
+!data/
+data/*
+!data/packs/
 # 학습 산출물 (218MB): 체크포인트·평가 JSON·체인 로그
 results/
 snapshots/

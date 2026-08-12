@@ -1,0 +1,159 @@
+[
+{"household":"맞벌이 부부 + 초등학생",
+ "personas":[
+  {"role":"엄마/회사원","wake_h":6.8,"sleep_h":23.2,"tidiness":0.7,"out_style":0,"out_leave_h":8.3,"out_ret_h":18.8,"act_pref":{"tv":1.2,"phone_scroll":1.1,"chores":1.3}},
+  {"role":"아빠/회사원","wake_h":7.1,"sleep_h":23.8,"tidiness":0.35,"out_style":0,"out_leave_h":8.6,"out_ret_h":19.9,"act_pref":{"tv":1.5,"snack":1.3}},
+  {"role":"초등학생","wake_h":7.4,"sleep_h":21.8,"tidiness":0.15,"out_style":1,"out_leave_h":8.6,"out_ret_h":15.2,"act_pref":{"tablet_time":1.8,"read":1.2}}],
+ "activities":[
+  {"name":"도시락_준비","agent":0,"time_h":6.9,"jitter_m":12,"p_day":0.8,"rooms":["kitchen"],"recepts":["counter"],"dur":[15,25],"uses":{"snack_box":0.9,"cup":0.4,"scissors":0.5},
+   "after":{"snack_box":[["fridge_top",0.55],["cabinet_top",0.25],["stay",0.2]],"scissors":[["drawer_top",0.6],["stay",0.4]]}},
+  {"name":"아이_숙제봐주기","agent":2,"time_h":16.0,"jitter_m":40,"p_day":0.7,"rooms":["study","living_room"],"recepts":["desk","coffee_table"],"dur":[40,70],"uses":{"notebook":0.85,"pen":0.9,"tablet":0.4},
+   "after":{"pen":[["stay",0.7],["home",0.3]],"notebook":[["stay",0.6],["home",0.4]]}},
+  {"name":"저녁_보드게임","agent":2,"time_h":20.2,"jitter_m":30,"p_day":0.25,"rooms":["living_room"],"recepts":["coffee_table"],"dur":[30,60],"uses":{"book":0.5,"snack_box":0.4,"cup":0.5}}]},
+
+{"household":"1인 재택 개발자",
+ "personas":[
+  {"role":"재택 개발자","wake_h":9.2,"sleep_h":25.3,"tidiness":0.25,"out_style":2,"act_pref":{"work":2.2,"phone_scroll":1.4,"snack":1.5,"coffee":1.8,"tv":0.6}}],
+ "activities":[
+  {"name":"아침_커피_리추얼","agent":0,"time_h":9.6,"jitter_m":20,"p_day":0.95,"rooms":["kitchen"],"recepts":["counter"],"dur":[8,15],"uses":{"cup":0.95,"phone":0.6},
+   "after":{"cup":[["stay",0.55],["sink",0.45]]}},
+  {"name":"밤샘_코딩","agent":0,"time_h":22.5,"jitter_m":45,"p_day":0.6,"rooms":["study","living_room"],"recepts":["desk"],"dur":[90,180],"uses":{"laptop":0.95,"earbuds":0.7,"cup":0.7,"snack_box":0.5,"charger":0.6},
+   "after":{"cup":[["stay",0.7],["sink",0.3]],"laptop":[["stay",0.8],["home",0.2]],"charger":[["stay",0.85],["home",0.15]]}},
+  {"name":"운동영상_따라하기","agent":0,"time_h":18.5,"jitter_m":60,"p_day":0.35,"rooms":["living_room"],"recepts":["floor"],"dur":[25,45],"uses":{"tablet":0.8,"water_bottle":0.8},
+   "after":{"water_bottle":[["stay",0.5],["sink",0.2],["fridge_top",0.3]]}}],
+ "chains":{"cup":[["stay",0.5],["sink",0.35],["home",0.15]]}},
+
+{"household":"노부부",
+ "personas":[
+  {"role":"은퇴 할아버지","wake_h":5.8,"sleep_h":21.8,"tidiness":0.8,"out_style":2,"act_pref":{"read":2.0,"tv":1.6,"chores":1.2,"phone_scroll":0.4}},
+  {"role":"할머니","wake_h":6.1,"sleep_h":22.1,"tidiness":0.85,"out_style":1,"out_leave_h":10.0,"out_ret_h":12.5,"act_pref":{"chores":1.8,"tv":1.4,"read":1.1}}],
+ "activities":[
+  {"name":"새벽_신문과_차","agent":0,"time_h":6.1,"jitter_m":15,"p_day":0.9,"rooms":["living_room"],"recepts":["sofa","coffee_table"],"dur":[35,60],"uses":{"book":0.7,"glasses":0.8,"cup":0.9},
+   "after":{"glasses":[["stay",0.5],["home",0.5]],"cup":[["sink",0.7],["stay",0.3]]}},
+  {"name":"약_챙겨먹기","agent":1,"time_h":8.0,"jitter_m":10,"p_day":0.97,"rooms":["kitchen"],"recepts":["counter"],"dur":[3,6],"uses":{"medicine":0.95,"cup":0.7},
+   "after":{"medicine":[["cabinet_top",0.8],["stay",0.2]],"cup":[["sink",0.6],["cabinet_top",0.3],["stay",0.1]]}},
+  {"name":"저녁_약_2차","agent":0,"time_h":20.5,"jitter_m":15,"p_day":0.9,"rooms":["kitchen"],"recepts":["counter"],"dur":[3,6],"uses":{"medicine":0.9,"cup":0.6},
+   "after":{"medicine":[["cabinet_top",0.85],["stay",0.15]]}},
+  {"name":"화분_돌보기","agent":1,"time_h":9.5,"jitter_m":30,"p_day":0.5,"rooms":["balcony","living_room"],"recepts":["shelf"],"dur":[15,30],"uses":{"scissors":0.5,"water_bottle":0.6},
+   "after":{"scissors":[["home",0.7],["stay",0.3]],"water_bottle":[["stay",0.4],["sink",0.6]]}}]},
+
+{"household":"대학생 룸메이트 3인",
+ "personas":[
+  {"role":"고시생","wake_h":7.5,"sleep_h":24.5,"tidiness":0.5,"out_style":1,"out_leave_h":9.0,"out_ret_h":22.0,"act_pref":{"work":2.0,"read":1.5}},
+  {"role":"밴드부 대학생","wake_h":10.5,"sleep_h":26.0,"tidiness":0.1,"out_style":1,"out_leave_h":12.5,"out_ret_h":21.0,"act_pref":{"phone_scroll":1.8,"tablet_time":1.5,"snack":1.6}},
+  {"role":"알바생","wake_h":8.8,"sleep_h":25.0,"tidiness":0.3,"out_style":0,"out_leave_h":10.2,"out_ret_h":20.3,"act_pref":{"tv":1.4,"snack":1.4}}],
+ "activities":[
+  {"name":"야식_라면","agent":1,"time_h":23.8,"jitter_m":40,"p_day":0.55,"rooms":["kitchen"],"recepts":["counter","dining_table"],"dur":[20,35],"uses":{"snack_box":0.8,"cup":0.6,"scissors":0.4},
+   "after":{"cup":[["stay",0.75],["sink",0.25]],"snack_box":[["stay",0.6],["cabinet_top",0.4]],"scissors":[["stay",0.7],["drawer_top",0.3]]}},
+  {"name":"거실_같이_게임","agent":2,"time_h":21.3,"jitter_m":45,"p_day":0.4,"rooms":["living_room"],"recepts":["sofa","coffee_table"],"dur":[60,120],"uses":{"remote":0.7,"tablet":0.5,"earbuds":0.4,"snack_box":0.6},
+   "after":{"remote":[["stay",0.6],["sofa",0.4]],"earbuds":[["stay",0.65],["home",0.35]]}},
+  {"name":"빨래_몰아하기","agent":0,"time_h":11.0,"jitter_m":90,"p_day":0.2,"rooms":["balcony","bathroom"],"recepts":["shelf"],"dur":[25,45],"uses":{"bag":0.5},
+   "after":{"bag":[["floor",0.6],["home",0.4]]}}],
+ "chains":{"cup":[["stay",0.6],["sink",0.3],["home",0.1]],"snack_box":[["stay",0.55],["cabinet_top",0.25],["fridge_top",0.2]]}},
+
+{"household":"교대근무 간호사 + 회사원",
+ "personas":[
+  {"role":"3교대 간호사","wake_h":13.5,"sleep_h":30.0,"tidiness":0.55,"out_style":0,"out_leave_h":20.5,"out_ret_h":32.0,"act_pref":{"phone_scroll":1.5,"tv":1.2,"shower":1.3}},
+  {"role":"회사원 남편","wake_h":7.0,"sleep_h":23.5,"tidiness":0.45,"out_style":0,"out_leave_h":8.4,"out_ret_h":19.2,"act_pref":{"tv":1.4,"cook":1.3}}],
+ "activities":[
+  {"name":"퇴근후_새벽샤워","agent":0,"time_h":8.3,"jitter_m":25,"p_day":0.6,"rooms":["bathroom"],"recepts":["bath_counter"],"dur":[20,35],"uses":{"hair_dryer":0.7},
+   "after":{"hair_dryer":[["bath_counter",0.5],["wardrobe_top",0.3],["stay",0.2]]}},
+  {"name":"출근전_유니폼_챙기기","agent":0,"time_h":19.8,"jitter_m":20,"p_day":0.7,"rooms":["bedroom"],"recepts":["bed","wardrobe_top"],"dur":[10,20],"uses":{"bag":0.85,"keys":0.5,"watch":0.6},
+   "after":{"watch":[["stay",0.4],["nightstand",0.6]]}},
+  {"name":"혼자_늦은저녁","agent":1,"time_h":20.0,"jitter_m":30,"p_day":0.75,"rooms":["kitchen","living_room"],"recepts":["dining_table","coffee_table"],"dur":[25,45],"uses":{"cup":0.7,"snack_box":0.6,"phone":0.8},
+   "after":{"cup":[["sink",0.55],["stay",0.45]]}}]},
+
+{"household":"신혼부부",
+ "personas":[
+  {"role":"아내/디자이너","wake_h":7.8,"sleep_h":24.3,"tidiness":0.6,"out_style":1,"out_leave_h":9.5,"out_ret_h":18.5,"act_pref":{"work":1.4,"tablet_time":1.3,"coffee":1.5}},
+  {"role":"남편/영업직","wake_h":6.9,"sleep_h":23.9,"tidiness":0.4,"out_style":0,"out_leave_h":8.0,"out_ret_h":20.5,"act_pref":{"tv":1.5,"phone_scroll":1.3}}],
+ "activities":[
+  {"name":"주말st_브런치","agent":0,"time_h":10.8,"jitter_m":40,"p_day":0.35,"rooms":["kitchen","dining_room"],"recepts":["dining_table"],"dur":[45,80],"uses":{"cup":0.9,"snack_box":0.7,"phone":0.6,"tablet":0.3},
+   "after":{"cup":[["sink",0.7],["stay",0.3]],"snack_box":[["fridge_top",0.5],["stay",0.5]]}},
+  {"name":"자기전_넷플릭스","agent":1,"time_h":22.6,"jitter_m":30,"p_day":0.8,"rooms":["bedroom"],"recepts":["bed"],"dur":[40,90],"uses":{"tablet":0.8,"phone":0.7,"charger":0.6},
+   "after":{"tablet":[["stay",0.5],["nightstand",0.5]],"charger":[["stay",0.8],["home",0.2]]}},
+  {"name":"화상_재택회의","agent":0,"time_h":14.0,"jitter_m":60,"p_day":0.4,"rooms":["study","living_room"],"recepts":["desk"],"dur":[45,90],"uses":{"laptop":0.95,"earbuds":0.85,"cup":0.5},
+   "after":{"earbuds":[["stay",0.55],["home",0.45]],"laptop":[["stay",0.6],["home",0.4]]}}]},
+
+{"household":"프리랜서 일러스트레이터 + 식물 집사",
+ "personas":[
+  {"role":"일러스트레이터","wake_h":10.0,"sleep_h":26.5,"tidiness":0.35,"out_style":2,"act_pref":{"work":2.5,"coffee":2.0,"tablet_time":1.2,"tv":0.5}}],
+ "activities":[
+  {"name":"태블릿_드로잉_세션","agent":0,"time_h":13.0,"jitter_m":90,"p_day":0.9,"rooms":["study"],"recepts":["desk"],"dur":[120,240],"uses":{"tablet":0.95,"pen":0.8,"earbuds":0.6,"cup":0.8,"water_bottle":0.5},
+   "after":{"pen":[["stay",0.8],["drawer_top",0.2]],"cup":[["stay",0.6],["sink",0.4]],"tablet":[["stay",0.75],["home",0.25]]}},
+  {"name":"식물_물주기_순회","agent":0,"time_h":11.2,"jitter_m":45,"p_day":0.45,"rooms":["balcony","living_room"],"recepts":["shelf"],"dur":[15,30],"uses":{"water_bottle":0.9,"scissors":0.35},
+   "after":{"water_bottle":[["sink",0.5],["stay",0.3],["home",0.2]],"scissors":[["home",0.6],["stay",0.4]]}},
+  {"name":"참고서적_뒤지기","agent":0,"time_h":15.5,"jitter_m":120,"p_day":0.4,"rooms":["study","living_room"],"recepts":["shelf","desk"],"dur":[10,25],"uses":{"book":0.9,"glasses":0.4},
+   "after":{"book":[["stay",0.55],["desk",0.25],["home",0.2]]}}]},
+
+{"household":"재수생 + 부모",
+ "personas":[
+  {"role":"재수생","wake_h":7.0,"sleep_h":25.5,"tidiness":0.2,"out_style":1,"out_leave_h":8.5,"out_ret_h":22.3,"act_pref":{"work":2.5,"phone_scroll":1.6,"snack":1.5}},
+  {"role":"아빠/공무원","wake_h":6.5,"sleep_h":23.0,"tidiness":0.6,"out_style":0,"out_leave_h":8.1,"out_ret_h":18.9,"act_pref":{"tv":1.7,"read":1.0}},
+  {"role":"엄마/주부","wake_h":6.3,"sleep_h":23.5,"tidiness":0.85,"out_style":1,"out_leave_h":10.0,"out_ret_h":13.0,"act_pref":{"chores":2.0,"cook":1.6,"tv":1.2}}],
+ "activities":[
+  {"name":"심야_인강","agent":0,"time_h":23.0,"jitter_m":40,"p_day":0.8,"rooms":["study","bedroom"],"recepts":["desk"],"dur":[60,150],"uses":{"laptop":0.85,"earbuds":0.8,"notebook":0.8,"pen":0.85,"snack_box":0.5,"cup":0.6},
+   "after":{"earbuds":[["stay",0.7],["home",0.3]],"cup":[["stay",0.75],["sink",0.25]],"notebook":[["stay",0.85],["home",0.15]]}},
+  {"name":"엄마_아침_반찬만들기","agent":2,"time_h":7.2,"jitter_m":25,"p_day":0.85,"rooms":["kitchen"],"recepts":["counter"],"dur":[35,70],"uses":{"snack_box":0.9,"scissors":0.7,"cup":0.3},
+   "after":{"snack_box":[["fridge_top",0.7],["cabinet_top",0.2],["stay",0.1]],"scissors":[["drawer_top",0.7],["sink",0.15],["stay",0.15]]}},
+  {"name":"온가족_늦은_과일","agent":1,"time_h":21.5,"jitter_m":25,"p_day":0.6,"rooms":["living_room"],"recepts":["coffee_table"],"dur":[20,35],"uses":{"snack_box":0.7,"scissors":0.5,"cup":0.7},
+   "after":{"scissors":[["sink",0.4],["drawer_top",0.35],["stay",0.25]],"cup":[["sink",0.6],["stay",0.4]]}}]},
+
+{"household":"자취 요리 유튜버",
+ "personas":[
+  {"role":"요리 유튜버","wake_h":8.5,"sleep_h":25.0,"tidiness":0.45,"out_style":1,"out_leave_h":10.5,"out_ret_h":14.0,"act_pref":{"cook":3.0,"work":1.5,"phone_scroll":1.2}}],
+ "activities":[
+  {"name":"촬영용_요리_준비","agent":0,"time_h":15.0,"jitter_m":60,"p_day":0.75,"rooms":["kitchen"],"recepts":["counter"],"dur":[60,120],"uses":{"snack_box":0.95,"scissors":0.85,"cup":0.6,"water_bottle":0.6,"phone":0.9},
+   "after":{"snack_box":[["fridge_top",0.45],["stay",0.35],["cabinet_top",0.2]],"scissors":[["sink",0.45],["stay",0.35],["drawer_top",0.2]],"cup":[["sink",0.65],["stay",0.35]]}},
+  {"name":"영상_편집","agent":0,"time_h":20.0,"jitter_m":60,"p_day":0.7,"rooms":["study","living_room"],"recepts":["desk"],"dur":[90,180],"uses":{"laptop":0.95,"earbuds":0.75,"cup":0.7,"charger":0.5},
+   "after":{"cup":[["stay",0.7],["sink",0.3]]}},
+  {"name":"설거지_정리_루틴","agent":0,"time_h":17.8,"jitter_m":40,"p_day":0.8,"rooms":["kitchen"],"recepts":["sink"],"dur":[15,30],"uses":{}}],
+ "chains":{"cup":[["sink",0.55],["cabinet_top",0.15],["stay",0.3]],"water_bottle":[["sink",0.3],["fridge_top",0.35],["stay",0.35]]}},
+
+{"household":"야간 택시기사 부부",
+ "personas":[
+  {"role":"야간 택시기사","wake_h":14.0,"sleep_h":30.5,"tidiness":0.3,"out_style":0,"out_leave_h":18.0,"out_ret_h":28.5,"act_pref":{"tv":1.6,"snack":1.5,"phone_scroll":1.2}},
+  {"role":"마트 캐셔 아내","wake_h":7.5,"sleep_h":23.8,"tidiness":0.65,"out_style":0,"out_leave_h":9.0,"out_ret_h":18.2,"act_pref":{"tv":1.3,"chores":1.4}}],
+ "activities":[
+  {"name":"오후_해장식사","agent":0,"time_h":14.8,"jitter_m":30,"p_day":0.85,"rooms":["kitchen","dining_room"],"recepts":["dining_table"],"dur":[25,45],"uses":{"cup":0.8,"snack_box":0.7,"phone":0.8},
+   "after":{"cup":[["stay",0.6],["sink",0.4]]}},
+  {"name":"출차전_소지품_점검","agent":0,"time_h":17.5,"jitter_m":20,"p_day":0.9,"rooms":["entrance","living_room"],"recepts":["console","shoe_cabinet"],"dur":[8,15],"uses":{"keys":0.95,"wallet":0.9,"phone":0.9,"charger":0.5},
+   "after":{"charger":[["stay",0.5],["home",0.5]]}},
+  {"name":"아내_저녁_드라마","agent":1,"time_h":20.3,"jitter_m":25,"p_day":0.85,"rooms":["living_room"],"recepts":["sofa"],"dur":[60,110],"uses":{"remote":0.9,"phone":0.7,"cup":0.5,"nail_clipper":0.25},
+   "after":{"nail_clipper":[["stay",0.5],["home",0.5]],"remote":[["sofa",0.5],["stay",0.5]]}}]},
+
+{"household":"운동 매니아 형제 셰어하우스",
+ "personas":[
+  {"role":"헬스트레이너 형","wake_h":5.5,"sleep_h":22.5,"tidiness":0.7,"out_style":0,"out_leave_h":6.5,"out_ret_h":21.0,"act_pref":{"shower":1.5,"cook":1.4,"phone_scroll":1.0}},
+  {"role":"대학원생 동생","wake_h":9.0,"sleep_h":25.5,"tidiness":0.25,"out_style":1,"out_leave_h":10.5,"out_ret_h":19.5,"act_pref":{"work":1.8,"tv":1.2,"snack":1.4}}],
+ "activities":[
+  {"name":"새벽_프로틴_쉐이크","agent":0,"time_h":5.8,"jitter_m":15,"p_day":0.9,"rooms":["kitchen"],"recepts":["counter"],"dur":[6,12],"uses":{"water_bottle":0.9,"cup":0.5,"snack_box":0.6},
+   "after":{"water_bottle":[["stay",0.35],["sink",0.35],["fridge_top",0.3]],"snack_box":[["cabinet_top",0.6],["stay",0.4]]}},
+  {"name":"저녁_도시락_밀프렙","agent":0,"time_h":21.3,"jitter_m":30,"p_day":0.5,"rooms":["kitchen"],"recepts":["counter"],"dur":[40,80],"uses":{"snack_box":0.9,"scissors":0.7,"cup":0.4},
+   "after":{"snack_box":[["fridge_top",0.75],["stay",0.25]],"scissors":[["sink",0.4],["drawer_top",0.4],["stay",0.2]]}},
+  {"name":"동생_논문작업","agent":1,"time_h":21.8,"jitter_m":60,"p_day":0.7,"rooms":["study","bedroom"],"recepts":["desk"],"dur":[80,160],"uses":{"laptop":0.9,"notebook":0.6,"pen":0.6,"earbuds":0.7,"cup":0.7},
+   "after":{"cup":[["stay",0.8],["sink",0.2]],"earbuds":[["stay",0.6],["home",0.4]]}}]},
+
+{"household":"은퇴 교사 + 주말 손주 방문",
+ "personas":[
+  {"role":"은퇴 교사","wake_h":6.0,"sleep_h":22.5,"tidiness":0.9,"out_style":1,"out_leave_h":9.5,"out_ret_h":11.5,"act_pref":{"read":2.2,"chores":1.5,"tv":1.0,"phone_scroll":0.3}},
+  {"role":"방문 손주(주말)","wake_h":8.5,"sleep_h":22.0,"tidiness":0.1,"out_style":2,"act_pref":{"tablet_time":2.0,"snack":1.8,"tv":1.5}}],
+ "activities":[
+  {"name":"필사_노트_쓰기","agent":0,"time_h":7.0,"jitter_m":20,"p_day":0.8,"rooms":["study"],"recepts":["desk"],"dur":[30,50],"uses":{"notebook":0.9,"pen":0.95,"glasses":0.8,"book":0.6,"cup":0.5},
+   "after":{"pen":[["drawer_top",0.5],["stay",0.5]],"glasses":[["home",0.6],["stay",0.4]],"book":[["home",0.7],["stay",0.3]],"notebook":[["home",0.6],["stay",0.4]]}},
+  {"name":"손주_거실_난장","agent":1,"time_h":14.5,"jitter_m":90,"p_day":0.45,"rooms":["living_room"],"recepts":["floor","sofa"],"dur":[60,120],"uses":{"tablet":0.8,"snack_box":0.7,"cup":0.6,"remote":0.5},
+   "after":{"tablet":[["floor",0.4],["sofa",0.35],["stay",0.25]],"cup":[["stay",0.7],["coffee_table",0.3]],"remote":[["floor",0.4],["stay",0.6]]}},
+  {"name":"저녁_정리_순찰","agent":0,"time_h":21.0,"jitter_m":20,"p_day":0.9,"rooms":["living_room","kitchen"],"recepts":["shelf"],"dur":[10,20],"uses":{}}]},
+
+{"household":"게이머 커플 + 고양이 집사",
+ "personas":[
+  {"role":"스트리머 여친","wake_h":11.0,"sleep_h":27.5,"tidiness":0.3,"out_style":2,"act_pref":{"work":1.8,"tablet_time":1.4,"snack":1.6}},
+  {"role":"직장인 남친","wake_h":7.3,"sleep_h":24.5,"tidiness":0.5,"out_style":0,"out_leave_h":8.7,"out_ret_h":19.3,"act_pref":{"tv":1.6,"phone_scroll":1.4}}],
+ "activities":[
+  {"name":"밤_방송_셋업","agent":0,"time_h":21.0,"jitter_m":40,"p_day":0.8,"rooms":["study"],"recepts":["desk"],"dur":[120,240],"uses":{"laptop":0.9,"earbuds":0.9,"cup":0.8,"snack_box":0.7,"charger":0.7,"phone":0.6},
+   "after":{"cup":[["stay",0.75],["sink",0.25]],"snack_box":[["stay",0.6],["cabinet_top",0.4]],"earbuds":[["stay",0.8],["home",0.2]]}},
+  {"name":"고양이_밥과_츄르","agent":1,"time_h":19.6,"jitter_m":20,"p_day":0.9,"rooms":["kitchen","balcony"],"recepts":["counter","shelf"],"dur":[8,15],"uses":{"snack_box":0.7,"scissors":0.5},
+   "after":{"snack_box":[["cabinet_top",0.55],["stay",0.45]],"scissors":[["drawer_top",0.55],["stay",0.45]]}},
+  {"name":"둘이_심야_영화","agent":1,"time_h":23.2,"jitter_m":35,"p_day":0.45,"rooms":["living_room"],"recepts":["sofa"],"dur":[90,140],"uses":{"remote":0.85,"snack_box":0.6,"cup":0.7,"tablet":0.3},
+   "after":{"remote":[["sofa",0.45],["coffee_table",0.3],["stay",0.25]],"cup":[["stay",0.8],["sink",0.2]]}}]}
+]
