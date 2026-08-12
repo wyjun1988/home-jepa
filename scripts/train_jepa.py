@@ -74,6 +74,9 @@ def main():
     ap.add_argument("--aug-gap", type=float, default=0.0,
                     help="structured masking: prob of a suffix-truncated hard copy per query")
     ap.add_argument("--val-every", type=int, default=250)
+    ap.add_argument("--align-teacher", action="store_true",
+                    help="s1: use only (query,k) pairs whose k-th reveal matches the "
+                         "CURRENT state at qt (privileged; CONCEPT_REVIEW 2.1 experiment)")
     ap.add_argument("--aux-weight", type=float, default=0.5,
                     help="stage-2 auxiliary flat-softmax task (Track S parity)")
     ap.add_argument("--gate-weight", type=float, default=0.0,
@@ -130,12 +133,17 @@ def main():
             g["lr"] = args.lr * (step + 1) / warm if step < warm else \
                 1e-5 + 0.5 * (args.lr - 1e-5) * (1 + math.cos(
                     (step - warm) / max(1, args.s1_steps - warm) * 3.141592))
-        samp = rng.sample(pool_s1, args.bs)
         if args.event_horizons:
             kidx = rng.randrange(3)
             win = ["fut", "fut2", "fut4"][kidx]
         else:
             kidx, win = 0, "fut"
+        if args.align_teacher:
+            okk = "fut_ok" + win[3:] if win != "fut" else "fut_ok1"
+            cand = [p_ for p_ in pool_s1 if tr_s1[p_[0]].queries[p_[1]].get(okk)]
+            samp = rng.sample(cand, min(args.bs, len(cand)))
+        else:
+            samp = rng.sample(pool_s1, args.bs)
         b_ctx = make_batch(tr_s1, samp, dev, window="idxs")
         b_tgt = make_batch(tr_s1, samp, dev, window=win)
         loss, stats = model.stage1_loss(b_ctx, b_tgt, args.w_var, args.w_cov, args.w_anchor,

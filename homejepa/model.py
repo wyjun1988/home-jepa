@@ -162,14 +162,22 @@ class EpTensors:
             qt=q["qt"], idxs=idxs, gt=self.loc_pos[q["gt_recept"]],
             futlbl=self._future_labels(q["obj"], q["qt"]),
             anchor=self.loc_pos[anchor_rec], anchor_t=anchor_t,
-            fut=self._future_window(q["qt"], q["obj"], ctx_fut, k=1),
-            fut2=self._future_window(q["qt"], q["obj"], ctx_fut, k=2),
-            fut4=self._future_window(q["qt"], q["obj"], ctx_fut, k=4),
-            absent=self._absence_at(self.loc_pos[anchor_rec], anchor_t,
-                                    CLASS_NAMES.index(o["cls"]), q["qt"]),
+            fut=self._future_window(q["qt"], q["obj"], ctx_fut, k=1,
+                                    gt_slot=self.loc_pos[q["gt_recept"]]),
+            fut_ok1=self._fut_ok,
+            fut2=self._future_window(q["qt"], q["obj"], ctx_fut, k=2,
+                                     gt_slot=self.loc_pos[q["gt_recept"]]),
+            fut_ok2=self._fut_ok,
+            fut4=self._future_window(q["qt"], q["obj"], ctx_fut, k=4,
+                                     gt_slot=self.loc_pos[q["gt_recept"]]),
+            fut_ok4=self._fut_ok,
+            absent=(self._no_absence() if excl else
+                    self._absence_at(self.loc_pos[anchor_rec], anchor_t,
+                                     CLASS_NAMES.index(o["cls"]), q["qt"])),
             hist=self._loc_hist(q["obj"], q["qt"], excl=excl),
             loc_feat=self._loc_feat(q["obj"], q["qt"], excl=excl),
-            gl_feat=self._glance_feat(o["cls"], q["qt"]),
+            gl_feat=(self._no_glance() if excl else
+                     self._glance_feat(o["cls"], q["qt"])),
             ref_idx=ref_idx,
             qcls=CLASS_NAMES.index(o["cls"]),
             qcidx=CIDX_CAP if self.noid else min(o["cidx"], CIDX_CAP - 1),
@@ -207,11 +215,16 @@ class EpTensors:
         out["misplaced"] = -1 if (hr < 0 or cur < 0) else int(cur != hr)
         return out
 
-    def _future_window(self, qt, oid, ctx_idxs, k=1):
+    def _future_window(self, qt, oid, ctx_idxs, k=1, gt_slot=None):
         nxts = [j for j in self.obj_know.get(oid, []) if self.t1[j] >= qt]
         if not nxts:
+            if gt_slot is not None:
+                self._fut_ok = False
             return ctx_idxs
         nxt = nxts[min(k, len(nxts)) - 1]
+        if gt_slot is not None:
+            rec = int(self.ev_rec[nxt])
+            self._fut_ok = rec >= 0 and self.loc_pos.get(rec, -9) == gt_slot
         tmax = int(self.t1[nxt])
         extra = [j for j in range(len(self.t1)) if qt <= self.t1[j] <= tmax]
         keep = {j for j in (set(ctx_idxs.tolist()) | set(extra[-64:]) | {nxt})
@@ -222,6 +235,20 @@ class EpTensors:
     NEVER = 1.0
 
     GLF = 4     # combination-attribute columns appended to loc_feat
+
+    def _no_glance(self):
+        """Consistent no-information glance features for aug copies: the
+        suffix-truncation hides sightings from the event window, but glances
+        aggregate them back in (CONCEPT_REVIEW 2.2 leak) -- so aug copies get
+        the 'never observed' state instead."""
+        f = np.zeros((MAX_LOC, self.GLF), dtype=np.float32)
+        f[:, 0] = self.NEVER
+        return f
+
+    def _no_absence(self):
+        f = np.zeros(5, dtype=np.float32)
+        f[0] = self.NEVER
+        return f
 
     def _glance_feat(self, cls_name, qt):
         """Per-location combination attributes from glance sets (id-free):
