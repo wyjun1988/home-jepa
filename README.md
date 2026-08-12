@@ -9,7 +9,7 @@ AI 안경(~1fps) 관측 스트림으로 4D scene graph 를 유지하며, **지�
   [P1](docs/RESULTS_P1_20260807.md) → [AUDIT](docs/AUDIT_20260808.md) → [P2](docs/RESULTS_P2_20260808.md) →
   [P3](docs/RESULTS_P3_20260808.md) → [P4](docs/RESULTS_P4_20260809.md) → [P5+P6](docs/RESULTS_P5_20260809.md) →
   [P7](docs/RESULTS_P7_20260809.md) → [P8](docs/RESULTS_P8_20260810.md) → [P9](docs/RESULTS_P9_20260810.md) →
-  [P10](docs/RESULTS_P10_20260811.md) → [P12](docs/RESULTS_P12_20260812.md) → [컨셉 검토](docs/CONCEPT_REVIEW_20260812.md) · 능력 요약 [CAPABILITY](docs/CAPABILITY_20260810.md)
+  [P10](docs/RESULTS_P10_20260811.md) → [P12](docs/RESULTS_P12_20260812.md) → [컨셉 검토](docs/CONCEPT_REVIEW_20260812.md) → [P13](docs/RESULTS_P13_20260812.md) · 능력 요약 [CAPABILITY](docs/CAPABILITY_20260810.md)
 - 데이터 준비: **[DATA_SETUP](docs/DATA_SETUP.md)** · [ADT 셋업](docs/ADT_SETUP.md) · NVIDIA 학습: [NVIDIA_SETUP](docs/NVIDIA_SETUP.md)
 
 ## 확립된 레시피 (2026-08-11 기준)
@@ -32,8 +32,9 @@ AI 안경(~1fps) 관측 스트림으로 4D scene graph 를 유지하며, **지�
 - **JEPA 트랙 (P3–P12 아크)**: 초기(P3–P8)엔 우위로 보였으나 P11 에서 보조신호 불일치가 드러났고,
   조건을 맞춘 P12 3자 비교에서 **사전학습 이득이 재현되지 않음**(랜덤초기화가 이동 케이스 우세,
   시드 1 — 잠정). 컨셉 검토(08-12)가 원리를 특정: **티처(다음 재관측)가 moved 층의 28%에서 현재
-  상태와 어긋난다** — JEPA 는 "지금 어디"가 아니라 "다음에 어디서 발견"을 배웠다. 정합 필터 실험이
-  반증 가능한 다음 수.
+  상태와 어긋난다** — JEPA 는 "지금 어디"가 아니라 "다음에 어디서 발견"을 배웠다. P13 정합 필터
+  실험(시드 0): 방향은 예측대로(align>base)였으나 **크기 부족 — 여전히 랜덤초기화 미달**.
+  Track J 종결 방향, 최종 확정은 4090 시드 1·2(런북 Job1).
 - **정보 상한 계측 (08-12)**: 동거인-moved 층의 사전지식 상한은 완벽게이트 가정에도 top-1 ≈0.22 —
   현 모델(0.15~0.18)은 그 84%. 이 층의 낮은 수치는 실패가 아니라 상한 근접(층화 정의상 moved 는
   전부 '관측되지 않은 이동'). 연관 능력은 **ref-past 질의**(과거 참조트랙 고정)로만 측정 가능 — 신설 예정.
