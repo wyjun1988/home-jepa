@@ -22,7 +22,8 @@ def main():
     ap.add_argument("--urls", default=os.path.join(ROOT, "ADT_download_urls.json"))
     ap.add_argument("--match", default="multiskeleton",
                     help="sequence-name filter (default: the two-person sessions)")
-    ap.add_argument("--part", default="main_groundtruth")
+    ap.add_argument("--part", default="main_groundtruth",
+                    help="comma-separated: e.g. main_groundtruth,video_main_rgb,segmentation")
     ap.add_argument("--out", default=os.path.join(ROOT, "gt"))
     ap.add_argument("--keep-zips", action="store_true")
     args = ap.parse_args()
@@ -33,30 +34,48 @@ def main():
             "받은 링크 파일을 그 경로에 저장하세요 (docs/DATA_SETUP.md)." % args.urls)
 
     seqs = json.load(open(args.urls))["sequences"]
-    picked = {n: v[args.part] for n, v in seqs.items()
-              if args.match in n and args.part in v}
-    total = sum(e["file_size_bytes"] for e in picked.values())
-    print("%d sequences matched '%s'  (%.2f GB, %s only)"
-          % (len(picked), args.match, total / 1e9, args.part), flush=True)
+    part_list = [p.strip() for p in args.part.split(",") if p.strip()]
+    picked = []
+    for n, v in sorted(seqs.items()):
+        if args.match not in n:
+            continue
+        for part in part_list:
+            if part in v:
+                picked.append((n, part, v[part]))
+    total = sum(e["file_size_bytes"] for _, _, e in picked)
+    print("%d files matched '%s' x %s  (%.2f GB)"
+          % (len(picked), args.match, part_list, total / 1e9), flush=True)
     os.makedirs(args.out, exist_ok=True)
 
     t0 = time.time()
-    for i, (name, e) in enumerate(sorted(picked.items())):
-        zpath = os.path.join(args.out, e["filename"])
-        # sequence dir name: strip the ADT_/…_main_groundtruth.zip wrapper
+    done = 0
+    for name, part, e in picked:
         seq_dir = os.path.join(args.out, name)
-        if os.path.isdir(seq_dir) and os.listdir(seq_dir):
+        os.makedirs(seq_dir, exist_ok=True)
+        fn = e["filename"]
+        is_zip = fn.endswith(".zip")
+        marker = os.path.join(seq_dir, ".done_" + part)
+        if part == "main_groundtruth" and not os.path.exists(marker) \
+                and os.path.exists(os.path.join(seq_dir, "2d_bounding_box.csv")):
+            open(marker, "w").close()      # pre-marker downloads
+        if os.path.exists(marker):
+            done += 1
             continue
-        if not (os.path.exists(zpath) and os.path.getsize(zpath) == e["file_size_bytes"]):
-            urllib.request.urlretrieve(e["download_url"], zpath)
-        with zipfile.ZipFile(zpath) as z:
-            z.extractall(seq_dir)
-        if not args.keep_zips:
-            os.remove(zpath)
-        print("[%d/%d] %s  %.0f MB  (%.0fs)"
-              % (i + 1, len(picked), name, e["file_size_bytes"] / 1e6, time.time() - t0),
+        dst = os.path.join(args.out if is_zip else seq_dir, fn)
+        if not (os.path.exists(dst) and os.path.getsize(dst) == e["file_size_bytes"]):
+            urllib.request.urlretrieve(e["download_url"], dst)
+        if is_zip:
+            sub = seq_dir if part == "main_groundtruth" else os.path.join(seq_dir, part)
+            with zipfile.ZipFile(dst) as z:
+                z.extractall(sub)
+            if not args.keep_zips:
+                os.remove(dst)
+        open(marker, "w").close()
+        done += 1
+        print("[%d/%d] %s/%s  %.0f MB  (%.0fs)"
+              % (done, len(picked), name, part, e["file_size_bytes"] / 1e6, time.time() - t0),
               flush=True)
-    print("ADT_GT_READY -> %s" % args.out)
+    print("ADT_DOWNLOAD_READY -> %s" % args.out)
 
 
 if __name__ == "__main__":
