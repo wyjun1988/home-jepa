@@ -48,6 +48,9 @@ def main():
     ap.add_argument("--steps", type=int, default=6000)
     ap.add_argument("--bs", type=int, default=128)
     ap.add_argument("--lr", type=float, default=3e-4)
+    ap.add_argument("--test-data", default=None,
+                    help="evaluate on this dir's test split instead (scale runs: "
+                         "train big, test on the standard v5 test)")
     ap.add_argument("--d", type=int, default=128)
     ap.add_argument("--layers", type=int, default=4)
     ap.add_argument("--max-events", type=int, default=256)
@@ -78,7 +81,7 @@ def main():
     t0 = time.time()
     tr = load_split(sorted(glob.glob(os.path.join(args.data, "train", "ep_*.json"))), args.max_events, noid=args.noid)
     va = load_split(sorted(glob.glob(os.path.join(args.data, "val", "ep_*.json"))), args.max_events, noid=args.noid)
-    te = load_split(sorted(glob.glob(os.path.join(args.data, "test", "ep_*.json"))), args.max_events, noid=args.noid)
+    te = load_split(sorted(glob.glob(os.path.join(args.test_data or os.path.join(args.data, "test"), "ep_*.json"))), args.max_events, noid=args.noid)
     print("loaded %d/%d/%d eps (%.1fs)" % (len(tr), len(va), len(te), time.time() - t0), flush=True)
 
     tag = args.tag or args.model
