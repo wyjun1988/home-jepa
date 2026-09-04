@@ -44,7 +44,7 @@ def main():
     dev = torch.device(args.device)
     rng = random.Random(0)
 
-    ck = torch.load(args.ckpt, map_location=dev)
+    ck = torch.load(args.ckpt, map_location=dev, weights_only=False)
     name = os.path.basename(args.ckpt)
     model, me = (build_jepa_probe if name.startswith("jepa_") else build_supervised)(ck, dev)
     model = model.to(dev)

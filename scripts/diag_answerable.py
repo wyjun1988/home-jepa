@@ -79,7 +79,7 @@ def main():
     cache = {}
     for name in args.ckpts.split(","):
         ck = torch.load(os.path.join(os.path.dirname(__file__), "..", "results", name + ".pt"),
-                        map_location=dev)
+                        map_location=dev, weights_only=False)
         noid = bool(ck.get("args", {}).get("noid", False))
         if noid not in cache:
             cache[noid] = load_split(files, 256, noid=noid)

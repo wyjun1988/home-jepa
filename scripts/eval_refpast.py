@@ -121,7 +121,7 @@ def main():
         if not os.path.exists(fp):
             print("skip %s (no ckpt)" % name)
             continue
-        ck = torch.load(fp, map_location=dev)
+        ck = torch.load(fp, map_location=dev, weights_only=False)
         model, _ = (build_jepa_probe if name.startswith("jepa_") else build_supervised)(ck, dev)
         model = model.to(dev).eval()
         samples = [(e, q) for e in range(len(eps)) for q in range(len(eps[e].queries))]

@@ -112,7 +112,7 @@ def main():
           (sorted(taus)[len(taus) // 2] / 3600.0))
     for name in args.models.split(","):
         fp = os.path.join(args.results, name + ".pt")
-        ck = torch.load(fp, map_location=dev)
+        ck = torch.load(fp, map_location=dev, weights_only=False)
         model, _ = (build_jepa_probe if name.startswith("jepa_") else build_supervised)(ck, dev)
         model = model.to(dev)
         nll, agg = evaluate(model, eps, dev)

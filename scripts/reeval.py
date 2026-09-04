@@ -52,7 +52,7 @@ def main():
     for fp in sorted(glob.glob(os.path.join(args.results, "*.pt"))):
         base = os.path.basename(fp)[:-3]
         try:
-            ck = torch.load(fp, map_location=dev)
+            ck = torch.load(fp, map_location=dev, weights_only=False)
         except Exception as e:
             print("skip %s (%s)" % (base, e))
             continue

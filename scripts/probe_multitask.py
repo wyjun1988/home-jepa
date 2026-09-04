@@ -33,7 +33,7 @@ def build_trunk(kind, path, dev):
     if kind.startswith("jepa"):
         kind = "jepa"
     if kind == "jepa":
-        ck = torch.load(path, map_location=dev)
+        ck = torch.load(path, map_location=dev, weights_only=False)
         a = ck["args"]
         m = HomeJepa(d=a["d"], layers=a["layers"], max_pos=a["max_events"] + 2,
                      room_feats=a.get("room_feats", False))
@@ -45,7 +45,7 @@ def build_trunk(kind, path, dev):
         def feat(b):
             return trunk.encode(b) + trunk.qdt_proj(b["qdt"])
     elif kind == "flatsup":
-        ck = torch.load(path, map_location=dev)
+        ck = torch.load(path, map_location=dev, weights_only=False)
         a = ck["args"]
         trunk = MODELS[a["model"]](d=a["d"], layers=a["layers"],
                                    max_pos=a["max_events"] + 2,

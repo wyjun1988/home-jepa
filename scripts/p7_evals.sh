@@ -23,7 +23,7 @@ from train_supervised import evaluate
 dev = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
 for name, noid in [("supervised_two_head_v4id", False), ("supervised_two_head_v4no", True),
                    ("jepa_jepa_v4no_ft_probe", True)]:
-    ck = torch.load("results/%s.pt" % name, map_location=dev)
+    ck = torch.load("results/%s.pt" % name, map_location=dev, weights_only=False)
     m, me = (build_jepa_probe if name.startswith("jepa_") else build_supervised)(ck, dev)
     eps = load_split(sorted(glob.glob("data/v4/test/ep_*.json")), me, noid=noid)
     nll, agg = evaluate(m.to(dev), eps, dev)

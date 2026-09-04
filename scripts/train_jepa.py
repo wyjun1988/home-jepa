@@ -112,7 +112,7 @@ def main():
     model = HomeJepa(d=args.d, layers=args.layers, max_pos=args.max_events + 2,
                      ema=args.ema, room_feats=args.room_feats).to(dev)
     if args.load_s1:
-        model.load_state_dict(torch.load(args.load_s1, map_location=dev)["state"])
+        model.load_state_dict(torch.load(args.load_s1, map_location=dev, weights_only=False)["state"])
         print("loaded stage-1 from %s" % args.load_s1, flush=True)
     if args.scratch:
         args.s1_steps = 0

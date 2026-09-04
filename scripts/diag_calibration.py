@@ -61,7 +61,7 @@ def main():
     eps = load_split(files, 256)
     for name in args.models.split(","):
         fp = os.path.join(args.results, name + ".pt")
-        ck = torch.load(fp, map_location=dev)
+        ck = torch.load(fp, map_location=dev, weights_only=False)
         if name.startswith("jepa_"):
             model, _ = build_jepa_probe(ck, dev)
         else:

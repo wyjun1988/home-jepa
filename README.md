@@ -90,5 +90,5 @@ snapshots/   pre_receptacle_20260809 (v0 코드 보존)
 ADT 는 본인 라이선스 동의 후 선별 다운로드(3.8GB). `data/` 와 `results/` 는 저장소에 없다.
 
 각 버전 체인 스크립트가 전체 파이프라인(생성→감사 게이트→학습→평가)을 담는다. 예: `bash scripts/v3_chain.sh`.
-환경: `~/work/stock-v2/.venv-mps/bin/python` (py3.9, torch 2.2.2, x86_64; MPS fp32). NVIDIA/CUDA 는 [NVIDIA_SETUP](docs/NVIDIA_SETUP.md).
+주 개발기: **M2 Max** — [M2_SETUP](docs/M2_SETUP_20260816.md) (`~/work/home-jepa/.venv`, torch 2.8, arm64, 3.2배). NVIDIA/CUDA 는 [NVIDIA_SETUP](docs/NVIDIA_SETUP.md).
 주의: 이 머신 VRAM 8GB — MPS 학습 중 영상 재생 불가. 데이터 재생성 후 `scripts/audit_dataset.py` PASS 필수.
